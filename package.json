@@ -9,7 +9,9 @@
     "bootstrap": "^4.4.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-email-share-link": "^1.0.3",
     "react-scripts": "3.4.1",
+    "react-share": "^4.1.0",
     "reactstrap": "^8.4.1",
     "yup": "^0.28.3"
   },
