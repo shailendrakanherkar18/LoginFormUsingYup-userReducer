@@ -6,11 +6,15 @@ import './index.css';
 
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
+// import { Example } from './components/Sample';
+// import UseReducerExample from './components/Sample/ReducerExample';
 import LoginContainer from './containers/LoginContainer';
   
 ReactDOM.render(
   <React.StrictMode>
     <LoginContainer />
+    {/* <Example /> */}
+    {/* <UseReducerExample /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
