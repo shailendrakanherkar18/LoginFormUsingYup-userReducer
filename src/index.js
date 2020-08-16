@@ -3,16 +3,23 @@ import ReactDOM from 'react-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-
-// import App from './App';
+import { Provider } from "react-redux";
+import { createStore } from 'redux';
 import * as serviceWorker from './serviceWorker';
-// import { Example } from './components/Sample';
-// import UseReducerExample from './components/Sample/ReducerExample';
+
 import LoginContainer from './containers/LoginContainer';
+import UserDetailsReducer from './reducers/UserDetailsReducer';
+import Routes from './routes';
   
+const store = createStore(
+  UserDetailsReducer,
+);
+
 ReactDOM.render(
   <React.StrictMode>
-    <LoginContainer />
+     <Provider store={store}>
+      <Routes />
+    </Provider>
     {/* <Example /> */}
     {/* <UseReducerExample /> */}
   </React.StrictMode>,

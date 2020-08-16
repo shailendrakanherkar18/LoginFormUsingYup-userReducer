@@ -1,9 +1,11 @@
 const initialState = {
   email: '',
   password: '',
+  emailErrorText: '',
+  passwordErrorText: ''
 };
 
-const loginDetailsReducer = (state = initialState, action) => {
+const LoginDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'email':
       return {...state, email: action.value };
@@ -14,8 +16,8 @@ const loginDetailsReducer = (state = initialState, action) => {
     case 'passwordError':
       return {...state, passwordErrorText: action.value};
     default:
-      throw new Error();
+      return state;
   }
 }
 
-export default loginDetailsReducer;
+export default LoginDetailsReducer;
