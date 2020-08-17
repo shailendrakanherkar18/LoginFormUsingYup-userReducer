@@ -7,12 +7,12 @@ import { Provider } from "react-redux";
 import { createStore, combineReducers } from 'redux';
 import * as serviceWorker from './serviceWorker';
 
-import ProjectsReducer from './reducers/ProjectsReducer';
-import LoginDetailsReducer from './reducers/LoginDetailsReducer';
+import projectsReducer from './reducers/projectsReducer';
+import loginDetailsReducer from './reducers/loginDetailsReducer';
 import Routes from './routes/routes';
 
 const store = createStore(
-  combineReducers({LoginDetailsReducer, ProjectsReducer})
+  combineReducers({loginDetailsReducer, projectsReducer})
 );
 
 ReactDOM.render(

@@ -7,7 +7,7 @@ import { Row, Col } from "reactstrap";
 import TopNav from "../components/Layout/Topnav";
 
 const DashboardContainer = () => {
-  const { userDetails } = useSelector(state => state.LoginDetailsReducer)
+  const { userDetails } = useSelector(state => state.loginDetailsReducer)
   return (
     <>
       <TopNav userDetails={userDetails}/>

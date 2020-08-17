@@ -10,7 +10,7 @@ import PrivateRoute from './PrivateRoute'
 import { useSelector } from 'react-redux';
 
 const Routes = () => {
-  const { userDetails } = useSelector(state => state.LoginDetailsReducer)
+  const { userDetails } = useSelector(state => state.loginDetailsReducer)
   return (
     <Router>
         <Switch>

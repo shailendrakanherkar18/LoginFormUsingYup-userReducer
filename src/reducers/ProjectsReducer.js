@@ -4,7 +4,7 @@ const initialState = {
   projects: []
 };
 
-const ProjectsReducer = (state = initialState, action) => {
+const projectsReducer = (state = initialState, action) => {
   switch (action.type) {
     case PROJECTS_REDUCER.SET_PROJECT_LIST:
       return {...state, projects: action.value };
@@ -13,4 +13,4 @@ const ProjectsReducer = (state = initialState, action) => {
   }
 }
 
-export default ProjectsReducer;
+export default projectsReducer;

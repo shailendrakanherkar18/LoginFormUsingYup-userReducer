@@ -8,7 +8,7 @@ import { LOGIN_REDUCER } from '../shared/actionConstants';
 
 const LoginContainer = () => {
   const dispatch = useDispatch()
-  const { email, password, emailErrorText, passwordErrorText, userDetails } = useSelector(state => state.LoginDetailsReducer)
+  const { email, password, emailErrorText, passwordErrorText, userDetails } = useSelector(state => state.loginDetailsReducer)
 
   const onEmailChange = (event) => {
     dispatch({ type: LOGIN_REDUCER.SET_EMAIL, value: event.target.value });

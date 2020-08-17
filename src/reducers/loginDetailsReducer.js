@@ -7,7 +7,7 @@ const initialState = {
   userDetails: {}
 };
 
-const LoginDetailsReducer = (state = initialState, action) => {
+const loginDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REDUCER.SET_EMAIL:
       return {...state, email: action.value };
@@ -24,4 +24,4 @@ const LoginDetailsReducer = (state = initialState, action) => {
   }
 }
 
-export default LoginDetailsReducer;
+export default loginDetailsReducer;
