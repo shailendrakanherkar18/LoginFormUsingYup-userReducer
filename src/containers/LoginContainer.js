@@ -1,33 +1,21 @@
-import React, {useReducer} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import {Redirect} from 'react-router-dom';
-import LoginDetailsReducer from '../reducers/LoginDetailsReducer';
 import LoginComponent from '../components/Login';
 import login from '../apis/loginApi';
+import { LOGIN_REDUCER } from '../shared/actionConstants';
 
 const LoginContainer = () => {
   const dispatch = useDispatch()
-  const { userDetails } = useSelector(state => state)
-  const initialState = {
-    email: '',
-    password: '',
-    emailErrorText: '',
-    passwordErrorText: ''
-  };
-  const [loginDetails, dispatchLoginDetails] = useReducer(
-    LoginDetailsReducer,
-    initialState
-  );
+  const { email, password, emailErrorText, passwordErrorText, userDetails } = useSelector(state => state.LoginDetailsReducer)
 
-  const {email, password, emailErrorText, passwordErrorText} = loginDetails
- //central state example
   const onEmailChange = (event) => {
-    dispatchLoginDetails({ type: 'email', value: event.target.value });
+    dispatch({ type: LOGIN_REDUCER.SET_EMAIL, value: event.target.value });
   };
 
   const onPasswordChange = (event) => {
-    dispatchLoginDetails({ type: 'password', value: event.target.value });
+    dispatch({ type: LOGIN_REDUCER.SET_PASSWORD, value: event.target.value });
   };
 
   let schema = yup.object().shape({
@@ -36,19 +24,19 @@ const LoginContainer = () => {
   });
 
   const onSubmit = () => {
-    schema.isValid(loginDetails).then(function (valid) {
+    schema.isValid({email, password}).then(function (valid) {
       if (!valid) {
-        schema.validate(loginDetails, { abortEarly: false }).catch((err) => {
+        schema.validate({email, password}, { abortEarly: false }).catch((err) => {
           err.inner.forEach((ele) => {
-            dispatchLoginDetails({ type: `${ele.path}Error`, value: ele.message });
+            dispatch({ type: `SET_${ele.path.toUpperCase()}_ERROR`, value: ele.message });
           });
         });
       } else {
         //Initiated Login Api call
-        login(loginDetails)
+        login({email, password})
           .then(({data}) => {
             // success
-            dispatch({type: 'SET_USER_DETAILS', value: data})
+            dispatch({type: LOGIN_REDUCER.SET_USER_DETAILS, value: data})
             console.log('data: ', data);
           })
           .catch((error) => {
@@ -59,7 +47,9 @@ const LoginContainer = () => {
     });
   };
 
-  console.log(userDetails, 'userDetails')
+  const clearError = (type) => {
+    dispatch({ type, value: '' });
+  }
 
   if(userDetails.auth_token) {
     //redirect
@@ -75,7 +65,7 @@ const LoginContainer = () => {
       onEmailChange={onEmailChange}
       onPasswordChange={onPasswordChange}
       onSubmit={onSubmit}
-      dispatch={dispatch}
+      clearError={clearError}
     />
   );
 };

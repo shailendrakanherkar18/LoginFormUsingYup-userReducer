@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {LOGIN_REDUCER} from '../../shared/actionConstants';
 
 import {
   Card,
@@ -23,7 +24,7 @@ const LoginComponent = (props) => {
     password,
     onPasswordChange,
     passwordErrorText,
-    dispatch,
+    clearError,
     onSubmit,
   } = props;
 
@@ -43,9 +44,7 @@ const LoginComponent = (props) => {
                     placeholder="example@domain.com"
                     onChange={onEmailChange}
                     value={email}
-                    onFocus={() => {
-                      dispatch({ type: `emailError`, value: '' });
-                    }}
+                    onFocus={() => clearError(LOGIN_REDUCER.SET_EMAIL_ERROR)}
                     invalid={emailErrorText !== ''}
                   />
                   <FormFeedback>{emailErrorText}</FormFeedback>
@@ -59,9 +58,7 @@ const LoginComponent = (props) => {
                     placeholder="password"
                     onChange={onPasswordChange}
                     value={password}
-                    onFocus={() => {
-                      dispatch({ type: `passwordError`, value: '' });
-                    }}
+                    onFocus={() => clearError(LOGIN_REDUCER.SET_PASSWORD_ERROR)}
                     invalid={passwordErrorText !== ''}
                   />
                   <FormFeedback>{passwordErrorText}</FormFeedback>
@@ -89,7 +86,7 @@ LoginComponent.propTypes = {
   passwordErrorText: PropTypes.string.isRequired,
   onPasswordChange: PropTypes.func.isRequired,
   onEmailChange: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 

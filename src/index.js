@@ -4,15 +4,15 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 import { Provider } from "react-redux";
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import * as serviceWorker from './serviceWorker';
 
-import LoginContainer from './containers/LoginContainer';
-import UserDetailsReducer from './reducers/UserDetailsReducer';
-import Routes from './routes';
-  
+import ProjectsReducer from './reducers/ProjectsReducer';
+import LoginDetailsReducer from './reducers/LoginDetailsReducer';
+import Routes from './routes/routes';
+
 const store = createStore(
-  UserDetailsReducer,
+  combineReducers({LoginDetailsReducer, ProjectsReducer})
 );
 
 ReactDOM.render(
