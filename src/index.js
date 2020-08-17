@@ -3,18 +3,14 @@ import ReactDOM from 'react-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
-
-// import App from './App';
 import * as serviceWorker from './serviceWorker';
-// import { Example } from './components/Sample';
-// import UseReducerExample from './components/Sample/ReducerExample';
 import LoginContainer from './containers/LoginContainer';
-  
+import DashboardContainer from './containers/DashboardContainer'
+
 ReactDOM.render(
   <React.StrictMode>
-    <LoginContainer />
-    {/* <Example /> */}
-    {/* <UseReducerExample /> */}
+    <DashboardContainer/>
+    {/* <LoginContainer /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );
