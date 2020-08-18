@@ -12,7 +12,7 @@ const DashboardContainer = () => {
     <>
       <TopNav userDetails={userDetails}/>
       {projects.map((project) => (
-        <Row key={project.id} className="mb-3">
+        <Row key={project.id} className="mt-2 mb-3 ml-0 mr-0">
           <Col md={{ size: 4, offset: 4 }}>
             <ProjectItem project={project} />
           </Col>

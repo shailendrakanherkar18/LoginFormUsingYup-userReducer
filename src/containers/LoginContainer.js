@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import {Redirect} from 'react-router-dom';
 import LoginComponent from '../components/Login';
-import login from '../apis/loginApi';
 import { LOGIN_REDUCER } from '../shared/actionConstants';
+
+import { loginRequest } from "../actions/loginActions";
 
 const LoginContainer = () => {
   const dispatch = useDispatch()
@@ -33,16 +34,7 @@ const LoginContainer = () => {
         });
       } else {
         //Initiated Login Api call
-        login({email, password})
-          .then(({data}) => {
-            // success
-            dispatch({type: LOGIN_REDUCER.SET_USER_DETAILS, value: data})
-            console.log('data: ', data);
-          })
-          .catch((error) => {
-            // TODO show error to user
-            console.log(error);
-          });
+        dispatch(loginRequest({email, password}));
       }
     });
   };
