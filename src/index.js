@@ -12,7 +12,10 @@ import loginDetailsReducer from './reducers/loginDetailsReducer';
 import Routes from './routes/routes';
 
 const store = createStore(
-  combineReducers({loginDetailsReducer, projectsReducer})
+  combineReducers({
+    loginDetailsReducer, 
+    projectsReducer
+  })
 );
 
 ReactDOM.render(

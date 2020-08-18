@@ -1,7 +1,7 @@
 import {LOGIN_REDUCER} from '../shared/actionConstants';
 const initialState = {
-  email: '',
-  password: '',
+  email: 'pragati.garud@joshsoftware.com',
+  password: 'password',
   emailErrorText: '',
   passwordErrorText: '',
   userDetails: {}
