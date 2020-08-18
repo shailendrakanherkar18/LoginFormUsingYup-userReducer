@@ -1,29 +1,28 @@
 import React, { useReducer } from 'react';
 import * as yup from 'yup';
-
+import {Redirect} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux';
 import loginDetailsReducer from '../reducers/loginDetailsReducer';
 import LoginComponent from '../components/Login';
 import login from '../apis/loginApi';
+import DashboardContainer from './DashboardContainer'
+import { LOGIN_REDUCER } from '../shared/actionContants';
 
 const LoginContainer = () => {
-  const initialState = {
-    email: '',
-    password: '',
-    emailErrorText: '',
-    passwordErrorText: '',
-  };
-  const [loginDetails, dispatch] = useReducer(
-    loginDetailsReducer,
-    initialState
-  );
-  const { email, password, passwordErrorText, emailErrorText } = loginDetails;
+
+  const dispatch = useDispatch()
+  const result = useSelector(state => state.loginDetailsReducer)
+  console.log(result, 'result')
+  const { email, password, passwordErrorText, emailErrorText, userDetails } = result;
+
+  const loginDetails = {email, password}
 
   const onEmailChange = (event) => {
-    dispatch({ type: 'email', value: event.target.value });
+    dispatch({ type: LOGIN_REDUCER.SET_EMAIL, value: event.target.value });
   };
 
   const onPasswordChange = (event) => {
-    dispatch({ type: 'password', value: event.target.value });
+    dispatch({ type: LOGIN_REDUCER.SET_PASSWORD, value: event.target.value });
   };
 
   let schema = yup.object().shape({
@@ -36,16 +35,18 @@ const LoginContainer = () => {
       if (!valid) {
         schema.validate(loginDetails, { abortEarly: false }).catch((err) => {
           err.inner.forEach((ele) => {
-            dispatch({ type: `${ele.path}Error`, value: ele.message });
+            dispatch({ type: `SET_${ele.path.toUpperCase()}_ERROR`, value: ele.message });
+            // SET_EMAIL_ERROR and SET_PASSWORD_ERROR
           });
         });
       } else {
         //Initiated Login Api call
         login(loginDetails)
-          .then((response) => {
+          .then(({data}) => {
             // success
             // set state isLoggedIn as true
-            console.log('response: ', response);
+            dispatch({type: LOGIN_REDUCER.SET_USER_DETAILS, value: data})
+            console.log('response: ', data);
           })
           .catch((error) => {
             // TODO show error to user
@@ -55,10 +56,10 @@ const LoginContainer = () => {
     });
   };
 
-  // if(isLoggedIn) {
-  //   //redirect
-  //   return ( <DashboardContainer /> )
-  // }
+  if(userDetails.auth_token) {
+    //redirect
+    return ( <Redirect to="/dashboard"/> )
+  }
 
   return (
     <LoginComponent
