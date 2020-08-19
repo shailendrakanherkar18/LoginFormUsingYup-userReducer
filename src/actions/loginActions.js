@@ -30,10 +30,11 @@ export const resetError = type => {
 
 //Dispatch on click of login
 export const loginRequest = data => {
-    return {
-        type: LOGIN_REDUCER.LOGIN_REQUEST,
-        value: data
-    }
+    return loginRequest(data)
+    // return {
+    //     type: LOGIN_REDUCER.LOGIN_REQUEST,
+    //     value: data
+    // }
 }
 
 //Dispatch on success of login
