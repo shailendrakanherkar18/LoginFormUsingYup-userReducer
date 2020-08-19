@@ -1,9 +1,9 @@
-import { all } from "redux-saga/effects";
+import { all, fork } from "redux-saga/effects";
 import { userSaga } from "./loginSaga";
 
 //watcher saga
 export function *rootSaga() {
     yield all([
-        userSaga(),
+        fork(userSaga),
     ]);
 }

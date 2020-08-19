@@ -26,24 +26,4 @@ export const loginAction = ({email, password}) => {
     return login({email, password});
 }
 
-function *fetchData() {
-    try {
-      let response = yield fetch('https://jsonplaceholder.typicode.com/users');
-      yield response.json();
-    } catch (error) {
-      console.log(error);
-      
-    }
-  }
-  
-  let it = fetchData();
-  let promise1 = it.next().value
-  promise1.then((response) => {
-    let promise2 = it.next(response).value
-    promise2.then((data) => {
-      // it.next(data);
-      it.throw(new Error('Custom Error'))
-    });
-  });
-
 

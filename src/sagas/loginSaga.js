@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest, all } from 'redux-saga/effects'
 import { LOGIN_REDUCER } from '../shared/actionConstants';
 import { setUserDetails, loginFailed } from "../actions/loginActions";
 import login from '../apis/loginApi';
@@ -7,7 +7,7 @@ import login from '../apis/loginApi';
 function *loginSaga(action) {
     try {
         const { data } = yield call(login, action.value);
-        yield put(setUserDetails(data));
+        yield put(setUserDetails(data));  
     } catch(error) {
         yield put((loginFailed(error)));
     }
@@ -15,5 +15,7 @@ function *loginSaga(action) {
 
 //watcher saga
 export function *userSaga() {
-    yield takeLatest(LOGIN_REDUCER.LOGIN_REQUEST, loginSaga);
+    yield all([
+        takeLatest(LOGIN_REDUCER.LOGIN_REQUEST, loginSaga)
+    ]);
 }
