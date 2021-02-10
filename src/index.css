@@ -1,3 +1,7 @@
 .h-100-vh {
   height: 100vh;
 }
+
+.card-body {
+  min-height: 135px;
+}

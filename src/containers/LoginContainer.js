@@ -1,20 +1,16 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import * as yup from 'yup';
-import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import loginDetailsReducer from '../reducers/loginDetailsReducer';
 import LoginComponent from '../components/Login';
 import login from '../apis/loginApi';
-import DashboardContainer from './DashboardContainer'
 import { LOGIN_REDUCER } from '../shared/actionContants';
 
 const LoginContainer = () => {
 
   const dispatch = useDispatch()
   const result = useSelector(state => state.loginDetailsReducer)
-  console.log(result, 'result')
   const { email, password, passwordErrorText, emailErrorText, userDetails } = result;
-
   const loginDetails = {email, password}
 
   const onEmailChange = (event) => {
@@ -57,8 +53,7 @@ const LoginContainer = () => {
   };
 
   if(userDetails.auth_token) {
-    //redirect
-    return ( <Redirect to="/dashboard"/> )
+    return <Redirect to="/dashboard"/>
   }
 
   return (

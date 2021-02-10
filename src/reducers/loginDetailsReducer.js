@@ -1,4 +1,5 @@
 import {LOGIN_REDUCER} from '../shared/actionContants'
+
 const initialState = {
   email: '',
   password: '',

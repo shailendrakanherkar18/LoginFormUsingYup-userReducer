@@ -1,4 +1,6 @@
 import React from "react";
+import {Redirect} from 'react-router-dom'
+
 import projects from "../projects";
 import ProjectItem from "../components/Dashboard/ProjectItem";
 import { useSelector } from 'react-redux';
@@ -8,16 +10,21 @@ import TopNav from "../components/Layout/Topnav";
 
 const DashboardContainer = () => {
   const { userDetails } = useSelector(state => state.loginDetailsReducer)
+  
+  if(!userDetails.auth_token) {
+    return <Redirect to="/"/>
+  }
+
   return (
     <>
       <TopNav userDetails={userDetails}/>
-      {projects.map((project) => (
-        <Row key={project.id} className="mb-3">
-          <Col md={{ size: 4, offset: 4 }}>
-            <ProjectItem project={project} />
-          </Col>
-        </Row>
-      ))}
+      <Row className="pt-3 ml-0 mr-0">
+        {projects.map((project) => (
+            <Col className="mb-3" sm={4}>
+              <ProjectItem project={project} />
+            </Col>
+        ))}
+      </Row>
     </>
   );
 };
