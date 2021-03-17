@@ -22,8 +22,11 @@ const LoginComponent = (props) => {
     password,
     onPasswordChange,
     onSubmit,
+    emailErrorText,
+    passwordErrorText
   } = props;
-
+  console.log(emailErrorText, passwordErrorText);
+  
   return (
     <Container>
       <Row className="h-100-vh">
@@ -40,8 +43,9 @@ const LoginComponent = (props) => {
                     placeholder="example@domain.com"
                     onChange={onEmailChange}
                     value={email}
+                    invalid={emailErrorText !== ""}
                   />
-                  <FormFeedback>Invalid Email</FormFeedback>
+                  <FormFeedback>{emailErrorText}</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                   <Label for="examplePassword">Password</Label>
@@ -52,8 +56,9 @@ const LoginComponent = (props) => {
                     placeholder="password"
                     onChange={onPasswordChange}
                     value={password}
+                    invalid={passwordErrorText !== ""}
                   />
-                  <FormFeedback>Invalid Password</FormFeedback>
+                  <FormFeedback>{passwordErrorText}</FormFeedback>
                 </FormGroup>
                 <FormGroup row className="ml-0">
                   <Label col={4}>Not registered ?</Label>
