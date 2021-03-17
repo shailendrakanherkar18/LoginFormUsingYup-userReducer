@@ -6,7 +6,7 @@ import {
 
 const TopNav = (props) => {
   return  <Navbar color="light" light expand="md">
-    <NavbarBrand>Welcome {props.userDetails.full_name}</NavbarBrand>
+    <NavbarBrand>Welcome!</NavbarBrand>
   </Navbar>
 }
 

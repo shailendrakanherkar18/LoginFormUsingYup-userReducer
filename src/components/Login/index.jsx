@@ -19,11 +19,8 @@ const LoginComponent = (props) => {
   const {
     email,
     onEmailChange,
-    emailErrorText,
     password,
     onPasswordChange,
-    passwordErrorText,
-    dispatch,
     onSubmit,
   } = props;
 
@@ -43,12 +40,8 @@ const LoginComponent = (props) => {
                     placeholder="example@domain.com"
                     onChange={onEmailChange}
                     value={email}
-                    onFocus={() => {
-                      dispatch({ type: `emailError`, value: '' });
-                    }}
-                    invalid={emailErrorText !== ''}
                   />
-                  <FormFeedback>{emailErrorText}</FormFeedback>
+                  <FormFeedback>Invalid Email</FormFeedback>
                 </FormGroup>
                 <FormGroup>
                   <Label for="examplePassword">Password</Label>
@@ -59,12 +52,8 @@ const LoginComponent = (props) => {
                     placeholder="password"
                     onChange={onPasswordChange}
                     value={password}
-                    onFocus={() => {
-                      dispatch({ type: `passwordError`, value: '' });
-                    }}
-                    invalid={passwordErrorText !== ''}
                   />
-                  <FormFeedback>{passwordErrorText}</FormFeedback>
+                  <FormFeedback>Invalid Password</FormFeedback>
                 </FormGroup>
                 <FormGroup row className="ml-0">
                   <Label col={4}>Not registered ?</Label>
@@ -89,7 +78,6 @@ LoginComponent.propTypes = {
   passwordErrorText: PropTypes.string.isRequired,
   onPasswordChange: PropTypes.func.isRequired,
   onEmailChange: PropTypes.func.isRequired,
-  dispatch: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
 
