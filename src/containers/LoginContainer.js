@@ -10,7 +10,6 @@ const LoginContainer = () => {
 
   const dispatch = useDispatch()
   const result = useSelector(state => state.loginDetailsReducer)
-  console.log(result, 'result')
   const { email, password, passwordErrorText, emailErrorText, userDetails } = result;
 
   const loginDetails = {email, password}
@@ -49,7 +48,6 @@ const LoginContainer = () => {
   };
 
   if(userDetails.auth_token) {
-    //redirect
     return ( <Redirect to="/dashboard"/> )
   }
 
