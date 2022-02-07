@@ -11,13 +11,13 @@ const DashboardContainer = () => {
   return (
     <>
       <TopNav userDetails={userDetails}/>
-      {projects.map((project) => (
-        <Row key={project.id} className="mb-3">
-          <Col md={{ size: 4, offset: 4 }}>
-            <ProjectItem project={project} />
-          </Col>
-        </Row>
-      ))}
+      <Row className="ml-0 mr-0 mb-3">
+        {projects.map((project) => (
+            <Col className="mt-3" key={project.id} md={{ size: 3 }}>
+              <ProjectItem project={project} />
+            </Col>
+        ))}
+      </Row>
     </>
   );
 };

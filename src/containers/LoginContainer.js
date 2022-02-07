@@ -1,12 +1,10 @@
-import React, { useReducer } from 'react';
+import React from 'react';
 import * as yup from 'yup';
 import {Redirect} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux';
-import loginDetailsReducer from '../reducers/loginDetailsReducer';
 import LoginComponent from '../components/Login';
 import login from '../apis/loginApi';
-import DashboardContainer from './DashboardContainer'
-import { LOGIN_REDUCER } from '../shared/actionContants';
+import { setEmail, setPassword, setError, setUserDetails } from '../actions/loginActions';
 
 const LoginContainer = () => {
 
@@ -18,11 +16,11 @@ const LoginContainer = () => {
   const loginDetails = {email, password}
 
   const onEmailChange = (event) => {
-    dispatch({ type: LOGIN_REDUCER.SET_EMAIL, value: event.target.value });
+    dispatch(setEmail(event.target.value));
   };
 
   const onPasswordChange = (event) => {
-    dispatch({ type: LOGIN_REDUCER.SET_PASSWORD, value: event.target.value });
+    dispatch(setPassword(event.target.value));
   };
 
   let schema = yup.object().shape({
@@ -35,21 +33,15 @@ const LoginContainer = () => {
       if (!valid) {
         schema.validate(loginDetails, { abortEarly: false }).catch((err) => {
           err.inner.forEach((ele) => {
-            dispatch({ type: `SET_${ele.path.toUpperCase()}_ERROR`, value: ele.message });
-            // SET_EMAIL_ERROR and SET_PASSWORD_ERROR
+            dispatch(setError(`SET_${ele.path.toUpperCase()}_ERROR`, ele.message));
           });
         });
       } else {
-        //Initiated Login Api call
         login(loginDetails)
           .then(({data}) => {
-            // success
-            // set state isLoggedIn as true
-            dispatch({type: LOGIN_REDUCER.SET_USER_DETAILS, value: data})
-            console.log('response: ', data);
+            dispatch(setUserDetails(data));
           })
           .catch((error) => {
-            // TODO show error to user
             console.log(error);
           });
       }
