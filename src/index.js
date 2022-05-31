@@ -17,7 +17,7 @@ const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
   combineReducers({
-    loginDetailsReducer, 
+    loginDetailsReducer,
     projectsReducer
   }),
   applyMiddleware(sagaMiddleware)
@@ -40,20 +40,44 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+
 // import login from "./apis/loginApi";
 
+//Basic example
 // function* generator() {
-//   yield 3+4;
-//   yield 5*6;
+//   yield 2*3;
+//   yield "Pragati";
 // }
 
-// const it = generator();
-// console.log(it.next());
-// console.log(it.next());
-// console.log(it.next());
-// console.log(it.next());
+//Return statement
+// funcion* generator() {
+//   yield "Hi!";
+//   return "Pragati";
+//   yield "welcome";
+// }
 
+//Lazy evaluation of infinite data
+// funcion* list() {
+//   let num = 1;
+//   while(true) {
+//     yield num;
+//     num++;
+//   }
+// }
 
+//two way communication
+// function* generator() {
+//   const name = yield "Enter name";
+//   console.log(name);
+// }
+
+//parameter passing
+// function* generator(name) {
+//   console.log(name);
+//   const lName = yield "Enter last name";
+//   yield name + lName;
+// }
 
 // function* loginRequest () {
 //   try {
