@@ -4,7 +4,7 @@ import {Redirect} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux';
 import LoginComponent from '../components/Login';
 import login from '../apis/loginApi';
-import { setEmail, setPassword, setError, setUserDetails } from '../actions/loginActions';
+import { setEmail, setPassword, setError, setUserDetails, loginRequest } from '../actions/loginActions';
 
 const LoginContainer = () => {
 
@@ -43,6 +43,7 @@ const LoginContainer = () => {
           .catch((error) => {
             console.log(error);
           });
+        // dispatch(loginRequest(loginDetails));
       }
     });
   };
