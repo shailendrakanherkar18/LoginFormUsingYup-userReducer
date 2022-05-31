@@ -11,7 +11,7 @@ import * as serviceWorker from './serviceWorker';
 import projectsReducer from './reducers/projectsReducer';
 import loginDetailsReducer from './reducers/loginDetailsReducer';
 import Routes from './routes/routes';
-import { rootSaga } from "./sagas/rootSaga";
+import { userSaga } from "./sagas/loginSaga";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -23,7 +23,7 @@ const store = createStore(
   applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(userSaga);
 
 ReactDOM.render(
   <React.StrictMode>
